@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content text-center">
+            <h1>Welcome to the Hotel & Restaurant Finder in Wai</h1>
+            <p>Explore delicious food and comfortable stays!</p>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a href="/search_hotels" class="btn btn-primary btn-lg">Search Hotels</a>
+                <a href="/search_restaurants" class="btn btn-secondary btn-lg">Search Restaurants</a>
+                <a href="/about" class="btn btn-info btn-lg">Learn About Wai City</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food and Drink Gallery -->
+    <div class="container mt-5">
+        <h2 class="text-center">Tempting Food and Luxurious Stays</h2>
+        <div class="row">
+            <!-- Card 1: Restaurants -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='images/food1.jpg') }}" class="card-img-top" alt="Delicious Dish">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Best Dining Experiences</h5>
+                        <p class="card-text">Explore places offering a variety of cuisines to suit your taste.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Hotels -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='images/hotel1.jpg') }}" class="card-img-top" alt="Luxury Hotel">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Luxury Hotel Stay</h5>
+                        <p class="card-text">Experience comfort and elegance at our top hotels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Restaurant Hunt. All rights reserved. | Designed for Wai City</p>
+        </div>
+    </footer>
+{% endblock %}
+        

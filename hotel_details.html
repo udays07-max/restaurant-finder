@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hotel.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-2"> <!-- Reduced margin-top from mt-3 to mt-2 -->
+    <!-- Hero Section -->
+    <div class="hero-image" style="background-image: url('{{ url_for('static', filename='images/hotel{{ hotel.id }}.jpg') }}'); background-size: cover; background-position: center; height: 250px; position: relative;"> <!-- Reduced height -->
+        <div class="overlay" style="position: absolute; bottom: 0; background: rgba(0, 0, 0, 0.5); width: 100%; padding: 10px 0;">
+            <h1 class="text-white text-center">{{ hotel.name }}</h1>
+        </div>
+    </div>
+
+    <!-- Hotel Information Section -->
+    <div class="row mt-3"> <!-- Reduced margin-top from mt-4 to mt-3 -->
+        <div class="col-md-8">
+            <h2>About {{ hotel.name }}</h2>
+            <p class="lead">{{ hotel.description }}</p>
+            
+            <h4 class="text-primary">Rate: <span class="text-dark">₹{{ hotel.rate }}</span></h4>
+
+            <h4 class="mt-4">Amenities</h4>
+            <ul class="list-unstyled d-flex flex-wrap">
+                {% for amenity in hotel.amenities %}
+                    <li class="p-2">
+                        <span class="badge bg-light shadow-sm text-dark">
+                            <i class="fas fa-check-circle"></i> {{ amenity }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Location Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Location</h4>
+                    <a href="{{ hotel.maps_link }}" target="_blank" class="btn btn-outline-info w-100">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotel Gallery Section -->
+    <div class="mt-5">
+        <h2 class="text-center mb-4">Photo Gallery</h2>
+        <div class="row">
+            {% for image in hotel.gallery_images %}
+                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <img src="{{ url_for('static', filename=image) }}" alt="Gallery Image" class="img-thumbnail gallery-image" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
+                </div>
+
+                <!-- Modal for full-sized image -->
+                <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ hotel.name }} - Image {{ loop.index }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{ url_for('static', filename=image) }}" alt="Gallery Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles for Gallery -->
+<style>
+    .gallery-image {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .gallery-image:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+{% endblock %}
